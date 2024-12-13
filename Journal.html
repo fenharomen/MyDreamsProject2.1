@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal</title>
+        <link rel="stylesheet" href="style/style.css">
+        <link href='https://fonts.googleapis.com/css?family=Baskervville' rel='stylesheet'>
+        <script src="https://kit.fontawesome.com/60405c7b50.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="menu-bar ">
+                <div class="home">
+                  <a href="index.html">
+                      <i class="fa-solid fa-house "></i>
+                      <p>Home</p>
+                  </a>
+                  
+                </div>
+                <div class="journal">
+                  <a href="Journal.html">
+                      <i class="fa-solid fa-image "></i>
+                      <p>Journal</p>
+                  </a>
+                  
+                </div>
+                <div class="saved">
+                  <a href="Saved.html">
+                      <i class="fa-regular fa-bookmark "></i>
+                      <p>Saved</p>
+                  </a>
+                  
+                </div>
+                <div class="nav-profile">
+                  <a href="Profile.html">
+                      <i class="fa-regular fa-user "></i>
+                      <p>Profile</p>
+                  </a>
+                </div>
+          </div>
+          <div class="search-bar-wrapper">
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search your dreams...">
+                
+            </div>
+            <div class="add-button-wrapper">   
+                 <button class="add-button" id="addNoteButton"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="head-name">
+            <h1>My Dreams</h1>
+        </div>
+        <div class="note-container" id="noteContainer">
+            <!-- Notes will appear here -->
+        </div>
+    
+        <div class="modal-overlay" id="modalOverlay"></div>
+    
+        <div class="modal" id="noteModal">
+            <h3>Add new dream</h3>
+            <input type="text" id="noteTitle" placeholder="Title" style="width: 380px;">
+            <textarea id="noteContent" rows="4" placeholder="Your note..." style="width: 380px;"></textarea>
+            <input type="text" id="noteImage" placeholder="Image URL (optional)" style="width: 380px;">
+            <button id="saveNoteButton">Save Note</button>
+        </div>
+    
+        <script>
+            const addNoteButton = document.getElementById('addNoteButton');
+            const noteModal = document.getElementById('noteModal');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const saveNoteButton = document.getElementById('saveNoteButton');
+            const noteContainer = document.getElementById('noteContainer');
+    
+            addNoteButton.addEventListener('click', () => {
+                noteModal.classList.add('active');
+                modalOverlay.classList.add('active');
+            });
+    
+            modalOverlay.addEventListener('click', () => {
+                noteModal.classList.remove('active');
+                modalOverlay.classList.remove('active');
+            });
+    
+            saveNoteButton.addEventListener('click', () => {
+                const noteTitle = document.getElementById('noteTitle').value;
+                const noteContent = document.getElementById('noteContent').value;
+                const noteImageURL = document.getElementById('noteImage').value;
+    
+                if (noteTitle && noteContent) {
+                    const note = document.createElement('div');
+                    note.className = 'note';
+                    
+                    if (noteImageURL) {
+                        const image = document.createElement('img');
+                        image.src = noteImageURL;
+                        note.appendChild(image);
+                    }
+    
+                    const title = document.createElement('h3');
+                    title.textContent = noteTitle;
+                    note.appendChild(title);
+    
+                    const content = document.createElement('p');
+                    content.textContent = noteContent;
+                    note.appendChild(content);
+    
+                    noteContainer.appendChild(note);
+    
+                    // Close modal
+                    noteModal.classList.remove('active');
+                    modalOverlay.classList.remove('active');
+    
+                    // Clear inputs
+                    document.getElementById('noteTitle').value = '';
+                    document.getElementById('noteContent').value = '';
+                    document.getElementById('noteImage').value = '';
+                } else {
+                    alert('Title and content are required!');
+                }
+            });
+        </script>
+    </div>
+        
+        
+     
+    </body>
+</html>
